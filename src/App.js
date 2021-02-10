@@ -1,7 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import {getPlayers} from './services/utils'
+import React from 'react'
+class App extends React.Component{
 
-function App() {
+
+  componentDidMount = ()=>{
+    getPlayers()
+    .then((players)=>{
+      console.log(players)
+    })
+  }
+
+  render(){
+
+
+    
   return (
     <div className="App">
       <header className="App-header">
@@ -19,7 +33,8 @@ function App() {
         </a>
       </header>
     </div>
-  );
+  )
+  }
 }
 
 export default App;
