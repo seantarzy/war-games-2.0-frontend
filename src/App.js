@@ -5,11 +5,25 @@ import React from 'react'
 class App extends React.Component{
 
 
+    state = {
+      players: [],
+      isMoble: false,
+      IsDesktop: false
+    }
+
+
   componentDidMount = ()=>{
     getPlayers()
     .then((players)=>{
-      console.log(players)
+        this.setState({players});
+      // console.log(players)
     })
+        if (window.innerWidth > 769) {
+          this.setState({isMoble: true});
+        } else {
+            this.setState({IsDesktop: true});
+        }
+
   }
 
   render(){
