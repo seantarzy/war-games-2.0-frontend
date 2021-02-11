@@ -2,13 +2,15 @@ import logo from './logo.svg';
 import './App.css';
 import {getPlayers} from './services/utils'
 import React from 'react'
-class App extends React.Component{
+import MainMenu from './components/MainMenu/MainMenu';
+import { WarGamesProvider } from "./Context/context";
 
+class App extends React.Component{
 
     state = {
       players: [],
       isMoble: false,
-      IsDesktop: false
+      isDesktop: false
     }
 
 
@@ -31,22 +33,9 @@ class App extends React.Component{
 
     
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <WarGamesProvider value = {{players: this.state.players, isMoble: this.state.isMoble, isDesktop: this.state.isDesktop}} >
+      <MainMenu/>
+    </WarGamesProvider>
   )
   }
 }
