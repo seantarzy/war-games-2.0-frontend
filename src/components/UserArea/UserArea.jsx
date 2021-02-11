@@ -3,10 +3,10 @@ import CardDeck from '../CardDeck/CardDeck';
 
 function UserArea(props) {
     return (
-        <div className = "bottom">
+        <section className = "user-area">
             <text>user side</text>
-            <CardDeck/>
-        </div>
+            <CardDeck userDeck = {true} dealCard = {props.dealCard} className = "user-deck"/>
+        </section>
     );
 }
 

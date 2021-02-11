@@ -32,15 +32,24 @@
   height: 350px;
   width: 200px;
 }
-.bottom {
+.deal-deck-button {
+  margin-top: 175px;
   flex: 1;
   justify-content: 'flex-end';
   margin-bottom: 36;
 }
+.user-area{
+  float: right;
+}
 
+.user-deck{
+}
 .deck{
+  background: url('./assets/war-games-card-deck.png');
+  background-size: cover;
   height: 200px;
   width: 120px;
+  margin-right: 30px;
 }
 
 .App-link {
@@ -58,6 +67,13 @@ button{
   size: 50px;
 }
 
+.player-card{
+  
+}
+
+.user-deck{
+  margin-bottom: -100px;
+}
 .main-menu-wrapper{
    margin: 0;
   position: absolute;

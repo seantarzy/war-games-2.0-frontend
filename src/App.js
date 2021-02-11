@@ -17,14 +17,16 @@ class App extends React.Component{
     state = {
       players: [],
       isMoble: false,
-      isDesktop: false
-    }
+      isDesktop: false,
+      computerDeck: []
+    } 
 
 
   componentDidMount = ()=>{
     getPlayers()
     .then((players)=>{
         this.setState({players});
+        console.log("players: ", players)
       // console.log(players)
     })
         if (window.innerWidth > 769) {
@@ -32,7 +34,19 @@ class App extends React.Component{
         } else {
             this.setState({IsDesktop: true});
         }
+        let computerDeck = [];
+        // console.log("players in computer mode: ", players);
+        let i = 0;
 
+        while (i < 52) {
+          let randomPlayer =
+            this.state.players[Math.floor(Math.random() * this.state.players.length)];
+          console.log(randomPlayer);
+          computerDeck.push(randomPlayer);
+          // setComputerDeck([...computerDeck,randomPlayer])
+          i++;
+        }
+this.setState({computerDeck})
   }
 
   render(){
@@ -44,7 +58,7 @@ class App extends React.Component{
       <Router>
     <Switch>
       <Route path = "/computer-game">
-      <ComputerMode/>
+      <ComputerMode computerDeck = {this.state.computerDeck}/>
       </Route>
       <Route path = "/multiplayer-game">
         <MultiplayerMode/>
