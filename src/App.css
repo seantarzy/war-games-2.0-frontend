@@ -28,13 +28,43 @@
   color: white;
 }
 
+.battle-field{
+  height: 350px;
+  width: 200px;
+}
+.bottom {
+  flex: 1;
+  justify-content: 'flex-end';
+  margin-bottom: 36;
+}
+
+.deck{
+  height: 200px;
+  width: 120px;
+}
+
 .App-link {
   color: #61dafb;
 }
+.section-title{
+  font-size: 80px;
+}
+.menu-button{
+  height: 80px;
+  width: 200px;
+  font-size: large;
+}
+button{
+  size: 50px;
+}
 
 .main-menu-wrapper{
-  align-items: center;
-  justify-content: center;
+   margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 @keyframes App-logo-spin {
   from {
