@@ -13,7 +13,7 @@ function PlayerCard(props) {
       <Card className = "baseball-card-front">
     <Card.Header className = "card-Header">{props.player.name}</Card.Header>
   <Card.Body>
-    <Image classname = "card-image" src = {props.player.image}/>
+    <Image className = "card-image" src = {props.player.image}/>
   </Card.Body>
   <Card.Footer>
     War: {props.player.war}

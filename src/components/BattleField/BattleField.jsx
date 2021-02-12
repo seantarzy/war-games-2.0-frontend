@@ -3,7 +3,6 @@ import PlayerCard from '../PlayerCard/PlayerCard';
 
 function BattleField(props) {
 
-    console.log("props from battlefield",props)
     return (
         <div className = "battle-field">
             {/* {props.battleInSession ?

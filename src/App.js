@@ -18,7 +18,6 @@ class App extends React.Component{
       players: [],
       isMoble: false,
       isDesktop: false,
-      computerDeck: []
     } 
 
 
@@ -26,7 +25,6 @@ class App extends React.Component{
     getPlayers()
     .then((players)=>{
         this.setState({players});
-        console.log("players: ", players)
       // console.log(players)
     })
         if (window.innerWidth > 769) {
@@ -34,24 +32,9 @@ class App extends React.Component{
         } else {
             this.setState({IsDesktop: true});
         }
-        let computerDeck = [];
-        // console.log("players in computer mode: ", players);
-        let i = 0;
-
-        while (i < 52) {
-          let randomPlayer =
-            this.state.players[Math.floor(Math.random() * this.state.players.length)];
-          console.log(randomPlayer);
-          computerDeck.push(randomPlayer);
-          // setComputerDeck([...computerDeck,randomPlayer])
-          i++;
-        }
-this.setState({computerDeck})
   }
 
   render(){
-
-
     
   return (
     <WarGamesProvider value = {{players: this.state.players, isMoble: this.state.isMoble, isDesktop: this.state.isDesktop}} >

@@ -22,55 +22,51 @@ const [flip, setFlip] = useState(false)
 
     useEffect(()=>{
 
-
     }, [])
 
     const dealCard = ()=>{
-        console.log("dealing card")
-         setUserPlayer(getRandomCard());
-         setCompPlayer(getRandomCard());
+        let randomPlayer1 = getRandomPlayer()
+        let randomPlayer2 = getRandomPlayer()
+
+        // debugger
+        // setCompPlayer(getRandomPlayer());
+        setUserPlayer(randomPlayer1);
+        setCompPlayer(randomPlayer2);
         // displayPlayingCards(userPlayer, compPlayer)
-        let userPlayerWar = parseInt(userPlayer['war'])
-        let compPlayerWar = parseInt(compPlayer['war'])
-        handleBattle(userPlayerWar, compPlayerWar)
-
+        let userPlayerWar = randomPlayer1['war']
+        let compPlayerWar = randomPlayer2['war']
+           let userPlayerWarFloat = parseFloat(userPlayerWar)
+           let compPlayerWarFloat = parseFloat(compPlayerWar)
+            
+        console.log("wars: ", userPlayerWar, compPlayerWar)
+        handleBattle(userPlayerWarFloat, compPlayerWarFloat)
     }
-
 
       function refreshPage() {
     window.location.reload(false);
   }
-    // const displayPlayingCards = (userPlayer, compPlayer)=>{
-
-
-    //     let userPlayerCard = <PlayerCard player = {userPlayer}/>
-    //     let compPlayerCard = <PlayerCard player = {compPlayer}/>
-    //     // document.getElementsByClassName('battle-field')[0].append(userPlayerCard)
-    //     // document.getElementsByClassName('battle-field')[0].append(compPlayerCard)
-    //     console.log(userPlayerCard, compPlayerCard)
-    // }
 
     const handleBattle = (userPlayerWar, compPlayerWar)=>{
+        console.log("handling battle: ", userPlayerWar, compPlayerWar)
         setBattleInSession(true)
         setTimeout(() => {
            
             setBattleInSession(false)
             setFlip(false)
-        //  console.log('Hello, World!')
         },
         3000)
         
 
         setTimeout(() => {
+            console.log("setting score...", userPlayerWar, compPlayerWar)
             if(userPlayerWar > compPlayerWar){
-                console.log("user wins this point")
+                console.log("hit")
                setuserScore(userScore+1)
            }   
            else if(userPlayerWar < compPlayerWar){
-                console.log("opponent this point")
+                console.log("hit")
                setopponentScore(opponentScore+1)
-           }   
-      
+           }
         },
         3100)
 
@@ -79,7 +75,8 @@ const [flip, setFlip] = useState(false)
         }, 2000)
 
     }
-   const getRandomCard = ()=>{
+   const getRandomPlayer = ()=>{
+
        let randomPlayer = players[Math.floor(Math.random() * players.length)]
         return randomPlayer
    }
@@ -114,9 +111,9 @@ refreshPage()
         null
         }
             <ScoreBoard userScore = {userScore} opponentScore={opponentScore}/>
-            <OpponentArea getRandomCard = {getRandomCard} compPlayer = {compPlayer} battleInSession = {battleInSession} flip = {flip}/>
+            <OpponentArea compPlayer = {compPlayer} battleInSession = {battleInSession} flip = {flip}/>
             <BattleField className = "battle-field"  userPlayer= {userPlayer} compPlayer = {compPlayer} battleInSession = {battleInSession}/>
-            <UserArea getRandomCard = {getRandomCard} dealCard = {dealCard} userPlayer= {userPlayer} battleInSession = {battleInSession} flip = {flip}/>
+            <UserArea dealCard = {dealCard} userPlayer= {userPlayer} battleInSession = {battleInSession} flip = {flip}/>
         </div>
     );
 }

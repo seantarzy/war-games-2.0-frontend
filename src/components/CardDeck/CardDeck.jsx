@@ -9,7 +9,6 @@ function CardDeck(props) {
         if(props.userDeck){ 
        let deck = document.getElementsByClassName('deck')[0]
        deck.classList.add("user-deck")
-        console.log("user deck")
          }
     }, [])
 
