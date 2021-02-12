@@ -51,18 +51,28 @@ const [flip, setFlip] = useState(false)
     // }
 
     const handleBattle = (userPlayerWar, compPlayerWar)=>{
-            if(userPlayerWar > compPlayerWar){
-                setuserScore(userScore+1)
-            }   
-            if(userPlayerWar < compPlayerWar){
-                setopponentScore(opponentScore+1)
-            }   
-            setBattleInSession(true)
-            setTimeout(() => {
+        setBattleInSession(true)
+        setTimeout(() => {
+           
             setBattleInSession(false)
             setFlip(false)
         //  console.log('Hello, World!')
-        }, 3000);
+        },
+        3000)
+        
+
+        setTimeout(() => {
+            if(userPlayerWar > compPlayerWar){
+                console.log("user wins this point")
+               setuserScore(userScore+1)
+           }   
+           else if(userPlayerWar < compPlayerWar){
+                console.log("opponent this point")
+               setopponentScore(opponentScore+1)
+           }   
+      
+        },
+        3100)
 
         setTimeout(()=>{
             setFlip(true)
@@ -84,7 +94,7 @@ const [flip, setFlip] = useState(false)
 }).then((result) => {
   /* Read more about isConfirmed, isDenied below */
   if (result.isConfirmed) {
-this.location.reload();
+refreshPage()
   }
 })
             :

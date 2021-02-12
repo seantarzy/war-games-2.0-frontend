@@ -92,16 +92,14 @@ button{
 }
 
 .user-player-card{
-top: -150px;
-/* z-index: 1; */
-animation: cardSlide 2s forwards;
-/* height: 100%; */
+  top: -150px;
+  animation: cardSlide 2s forwards;
 }
 
 .baseball-card-front{
+  height: 90%;
+  width: 100%;
   background-color: white;
-height: 100px;
-width: 60px;
  transition: transform 0.4s;
   transform-style: preserve-3d;
 /* transform: rotateY('180deg'); */
@@ -113,7 +111,9 @@ width: 60px;
     transform: rotateY(-180deg);
   
 }
-
+.card-header{
+  width: "15rm";
+}
 .card-image{
   height: 80%;
   width: 80%; 

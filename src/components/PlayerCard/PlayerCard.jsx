@@ -5,20 +5,19 @@ function PlayerCard(props) {
 
 
     useEffect(()=>{
-        console.log("player card props",props.player.war)
+        console.log("player card props",props.player.name)
     },[])
     return (
     <div className = { props.userPlayer ?  "user-player-card" : "computer-player-card"} style={{ width: '10rem', height: '15rem'}}>
-
       {props.flip ?
       <Card className = "baseball-card-front">
+    <Card.Header className = "card-Header">{props.player.name}</Card.Header>
   <Card.Body>
-    <Card.Title>{props.player.name}</Card.Title>
     <Image classname = "card-image" src = {props.player.image}/>
-  <Card.Footer>
-    {props.player.war}
-  </Card.Footer>
   </Card.Body>
+  <Card.Footer>
+    War: {props.player.war}
+  </Card.Footer>
       </Card>
     :
     <Card className = "baseball-card-back">
