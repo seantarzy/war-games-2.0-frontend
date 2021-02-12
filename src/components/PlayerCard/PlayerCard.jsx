@@ -1,23 +1,33 @@
 import React, { useEffect } from 'react';
-import {Card} from 'react-bootstrap'
+import {Card, Image} from 'react-bootstrap'
+import baseballCardBack from '../../assets/war-games-baseball-card-back.png'
 function PlayerCard(props) {
 
 
     useEffect(()=>{
-        console.log("player card props",props)
+        console.log("player card props",props.player.war)
     },[])
-    
     return (
-    <Card className = "player-card">
-        <Card.Img variant="top" src={props.img}/>
+    <div className = { props.userPlayer ?  "user-player-card" : "computer-player-card"} style={{ width: '10rem', height: '15rem'}}>
+
+      {props.flip ?
+      <Card className = "baseball-card-front">
   <Card.Body>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </Card.Text>
+    <Card.Title>{props.player.name}</Card.Title>
+    <Image classname = "card-image" src = {props.player.image}/>
+  <Card.Footer>
+    {props.player.war}
+  </Card.Footer>
   </Card.Body>
-        </Card>
+      </Card>
+    :
+    <Card className = "baseball-card-back">
+  <Card.Body >
+<Image className = "card-image" src={baseballCardBack} />
+  </Card.Body>
+    </Card>
+}
+      </div>
     );
 }
 

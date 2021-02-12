@@ -90,3 +90,60 @@ button{
     transform: rotate(360deg);
   }
 }
+
+.user-player-card{
+top: -150px;
+/* z-index: 1; */
+animation: cardSlide 2s forwards;
+/* height: 100%; */
+}
+
+.baseball-card-front{
+  background-color: white;
+height: 100px;
+width: 60px;
+ transition: transform 0.4s;
+  transform-style: preserve-3d;
+/* transform: rotateY('180deg'); */
+}
+
+.baseball-card-back{
+  height: 100%;
+  width: 100%;
+    transform: rotateY(-180deg);
+  
+}
+
+.card-image{
+  height: 80%;
+  width: 80%; 
+}
+
+@keyframes cardSlide {
+  from {
+    transform: translateX(0%) translateY(0%);
+  }
+   to{ transform: translateX(-250%) translateY(-250%)};
+}
+@keyframes mobileCardSlide {
+  from {
+    transform: translateX(0%) translateY(0%);
+  }
+   to{ transform: translateX(-75%) translateY(-120%)};
+}
+
+
+
+
+@media (max-width: 767px) { 
+
+.user-player-card{
+top: -150px;
+/* z-index: 1; */
+animation: mobileCardSlide 2s forwards;
+/* height: 100%; */
+}
+
+
+
+}
