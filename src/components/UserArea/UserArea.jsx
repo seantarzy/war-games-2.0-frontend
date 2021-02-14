@@ -10,7 +10,6 @@ function UserArea(props) {
             :
             null}
             <CardDeck userDeck = {true} dealCard = {props.dealCard} className = "user-deck"/>
-
         </section>
     );
 }
