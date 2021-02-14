@@ -57,33 +57,12 @@ const [flip, setFlip] = useState(false)
         3000)
         
 
-        setTimeout(() => {
+setTimeout(() => {
             console.log("setting score...", userPlayerWar, compPlayerWar)
             if(userPlayerWar > compPlayerWar){
-                console.log("hit")
                setuserScore(userScore+1)
-           }   
-           else if(userPlayerWar < compPlayerWar){
-                console.log("hit")
-               setopponentScore(opponentScore+1)
-           }
-        },
-        3100)
-
-        setTimeout(()=>{
-            setFlip(true)
-        }, 2000)
-
-    }
-   const getRandomPlayer = ()=>{
-
-       let randomPlayer = players[Math.floor(Math.random() * players.length)]
-        return randomPlayer
-   }
-    return (
-        <div>
-            {userScore ==10 ?
-            Swal.fire({
+                  if(userScore === 2){
+                Swal.fire({
   title: 'You Won!',
   text: 'Play again?',
   icon: 'success',
@@ -94,10 +73,13 @@ const [flip, setFlip] = useState(false)
 refreshPage()
   }
 })
-            :
-            opponentScore == 10 ? 
-     Swal.fire({
-  title: 'You Lost!',
+           }
+           }
+           else if(userPlayerWar < compPlayerWar){
+               setopponentScore(opponentScore+1)
+               if(opponentScore === 2){
+      Swal.fire({
+  title: 'You Lose!',
   text: 'Play again?',
   icon: 'error',
   confirmButtonText: 'Ok'
@@ -106,10 +88,26 @@ refreshPage()
   if (result.isConfirmed) {
 refreshPage()
   }
-})
-        :
-        null
-        }
+})           }
+
+           }
+        },
+        3100)
+        setTimeout(()=>{
+            setFlip(true)
+        }, 2000)
+    setTimeout(()=>{
+                
+
+    }, 3150)    
+    }
+   const getRandomPlayer = ()=>{
+
+       let randomPlayer = players[Math.floor(Math.random() * players.length)]
+        return randomPlayer
+   }
+    return (
+        <div>
             <ScoreBoard userScore = {userScore} opponentScore={opponentScore}/>
             <OpponentArea compPlayer = {compPlayer} battleInSession = {battleInSession} flip = {flip}/>
             <BattleField className = "battle-field"  userPlayer= {userPlayer} compPlayer = {compPlayer} battleInSession = {battleInSession}/>
