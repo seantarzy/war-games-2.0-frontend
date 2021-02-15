@@ -2,10 +2,6 @@ import React, { useEffect } from 'react';
 import '../../App.css'
 function FeedbackText(props) {
 
-
-    useEffect(()=>{
-        console.log("feedback text")
-    },[])
     return (
         <div >
             {props.userWinsBattle? 

@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
 import {Button, ButtonToolbar} from 'react-bootstrap'
-import DeckImage from '../../assets/war-games-card-deck.png'
 import "bootstrap/dist/css/bootstrap.min.css";
-
-// import '../../App.css'
 
 function CardDeck(props) {
 
@@ -12,9 +9,7 @@ function CardDeck(props) {
        let deck = document.getElementsByClassName('deck')[0]
        deck.classList.add("user-deck")
          }
-    }, [])
-
-
+    })
 
     return (
         <div className = "deck" >

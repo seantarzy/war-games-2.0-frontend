@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {getPlayers} from './services/utils'
 import React from 'react'
@@ -8,7 +7,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import ComputerMode from './components/ComputerMode/ComputerMode';
 import MultiplayerMode from './components/MultiplayerMode/MultiplayerMode';

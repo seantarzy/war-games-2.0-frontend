@@ -1,7 +1,5 @@
 .App {
-    display: 'flex';
-    alignItems: 'center';
-    justifyContent: 'center';
+  display: 'flex';
   text-align: center;
 }
 
@@ -59,8 +57,6 @@
 .menu-button{
   height: 80px;
   width: 200px;
-  /* margin-left: 50%; */
-  /* font-size: large; */
 }
 
 
@@ -100,9 +96,7 @@
     transform: rotateY(-180deg);
   padding-bottom: -20%;
 }
-.card-header{
-  /* width: "15rm"; */
-}
+
 .card-image{
   height: 100%;
   width: 100%; 
@@ -168,8 +162,6 @@
    to{ transform: translateX(10%) translateY(20%)};
 }
 
-
-
 @media (max-width: 767px) { 
 
 .user-player-card{
@@ -182,5 +174,23 @@ animation: mobileCardSlide 2s forwards;
 .computer-player-card{
   animation: mobileCardSlide2 2s forwards;
 }
+
+.feedback-text-win {
+  animation: feedbackFade 2s;
+  color: green;
+  position: absolute;
+  top: 200px;
+  left: 200px;
+  animation-fill-mode:forwards;
+}
+.feedback-text-loss {
+  animation: feedbackFade 2s;
+  color: red;
+  position: absolute;
+  top: 200px;
+  left: 200px;
+  animation-fill-mode: forwards;
+}
+
 
 }

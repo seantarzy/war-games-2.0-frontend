@@ -1,18 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import WarGamesContext from '../../Context/context'
 import {Card, Image} from 'react-bootstrap'
 import baseballCardBack from '../../assets/war-games-baseball-card-back.png'
 function PlayerCard(props) {
 
-    useEffect(()=>{
-      // console.log("context yo: ",WarGamesContext)
-    },[])
-
     const {isMobile} = useContext(WarGamesContext);
-    console.log("mobile: ",isMobile)
-    if(isMobile){
-      console.log("mobile")
-    }
+ 
     return (
     <div className = { props.userPlayer ?  "user-player-card" : "computer-player-card"} style={ isMobile ? {  width: '8rem', height: '6rem'} : {  width: '10rem', height: '11rem'}}>
       {props.flip ?

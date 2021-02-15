@@ -1,13 +1,13 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import WarGamesContext from '../../Context/context';
-import BattleField from '../BattleField/BattleField';
 import OpponentArea from '../OpponentArea/OpponentArea';
 import ScoreBoard from '../ScoreBoard/ScoreBoard';
 import FeedbackText from '../FeedbackText/FeedbackText.jsx'
 import UserArea from '../UserArea/UserArea'
+import BattleField from '../BattleField/BattleField'
 import Swal from 'sweetalert2'
 
-function ComputerMode(props) {
+function ComputerMode() {
 const {players} = useContext(WarGamesContext)
 
 const [feedbackText, setfeedbackText] = useState(false)
@@ -39,9 +39,9 @@ const [userWinsBattle, setUserWinsBattle] = useState(false)
     const handleWinner = (winner)=>{
         if(winner){
             Swal.fire({
-            title: winner=="user" ? 'You Won!' : 'You Lost',
+            title: winner==="user" ? 'You Won!' : 'You Lost',
             text: 'Play again?',
-            icon: winner=="user" ? 'success' : 'error',
+            icon: winner==="user" ? 'success' : 'error',
             confirmButtonText: 'Ok'
             })
                 .then((result) => {
@@ -56,13 +56,13 @@ const [userWinsBattle, setUserWinsBattle] = useState(false)
         if(userPlayerWar > opponentPlayerWar){
             setUserWinsBattle(true)
             setuserScore(userScore+1)
-                if(userScore===2){
+                if(userScore===9){
                     handleWinner("user")   
                 }
         }
         else if(userPlayerWar < opponentPlayerWar){
             setopponentScore(opponentScore+1)
-                if(opponentScore === 1){
+                if(opponentScore === 9){
                     handleWinner("opponent") 
                 }
         }
@@ -103,7 +103,7 @@ const [userWinsBattle, setUserWinsBattle] = useState(false)
             <ScoreBoard userScore = {userScore} opponentScore={opponentScore}/>
             {feedbackText ?<FeedbackText userWinsBattle = {userWinsBattle}/> : null}
             <OpponentArea compPlayer = {compPlayer} battleInSession = {battleInSession} flip = {flip}/>
-            <BattleField className = "battle-field"  userPlayer= {userPlayer} compPlayer = {compPlayer} battleInSession = {battleInSession}/>
+            <BattleField className = "battle-field" />
             <UserArea dealCard = {dealCard} userPlayer= {userPlayer} battleInSession = {battleInSession} flip = {flip}/>
         </div>
     );
