@@ -108,9 +108,31 @@
   width: 100%; 
 }
 
+.feedback-text-win {
+  animation: feedbackFade 2s;
+  color: green;
+  position: absolute;
+  top: 200px;
+  left: 300px;
+  animation-fill-mode:forwards;
+}
+.feedback-text-loss {
+  animation: feedbackFade 2s;
+  color: red;
+  position: absolute;
+  top: 200px;
+  left: 300px;
+  animation-fill-mode: forwards;
+}
+
 .computer-player-card{
   animation: cardSlide2 2s forwards;
 }
+
+.coming-soon-text{
+  animation: regularFadeIn 2s;
+}
+
 
 @keyframes cardSlide {
   from {
@@ -118,11 +140,20 @@
   }
    to{ transform: translateX(-250%) translateY(-250%)};
 }
+@keyframes feedbackFade {
+   0%,100% { opacity: 0 }
+  50% { opacity: 1 }
+}
+@keyframes regularFadeIn {
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
+
 @keyframes cardSlide2 {
   from {
     transform: translateX(0%) translateY(0%);
   }
-   to{ transform: translateX(250%) translateY(250%)};
+   to{ transform: translateX(250%) translateY(120%)};
 }
 @keyframes mobileCardSlide {
   from {

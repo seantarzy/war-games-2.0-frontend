@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import '../../App.css'
 function FeedbackText(props) {
 
 
@@ -6,11 +7,11 @@ function FeedbackText(props) {
         console.log("feedback text")
     },[])
     return (
-        <div>
+        <div >
             {props.userWinsBattle? 
-            <h1>Nice!</h1>
+            <h1 className = "feedback-text-win">Nice!</h1>
             :
-            <h1>Ouch!</h1>
+            <h1 className = "feedback-text-loss">Ouch!</h1>
             }
         </div>
     );
