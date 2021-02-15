@@ -16,7 +16,7 @@ class App extends React.Component{
 
     state = {
       players: [],
-      isMoble: false,
+      isMobile: false,
       isDesktop: false,
     } 
 
@@ -25,19 +25,18 @@ class App extends React.Component{
     getPlayers()
     .then((players)=>{
         this.setState({players});
-      // console.log(players)
     })
         if (window.innerWidth > 769) {
-          this.setState({isMoble: true});
+          this.setState({isDesktop: true});
         } else {
-            this.setState({IsDesktop: true});
+            this.setState({isMobile: true});
         }
   }
 
   render(){
     
   return (
-    <WarGamesProvider value = {{players: this.state.players, isMoble: this.state.isMoble, isDesktop: this.state.isDesktop}} >
+    <WarGamesProvider value = {{players: this.state.players, isMobile: this.state.isMobile, isDesktop: this.state.isDesktop}} >
       <Router>
     <Switch>
       <Route path = "/computer-game">

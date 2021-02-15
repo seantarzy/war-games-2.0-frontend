@@ -1,5 +1,5 @@
 
-const BACKEND = "http://localhost:3000/";
+const BACKEND = "https://fathomless-mesa-65505.herokuapp.com/";
 
 export const getPlayers = ()=>{
    return fetch(`${BACKEND}players`)

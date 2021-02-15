@@ -10,15 +10,15 @@ function MainMenu(props) {
     const {isDesktop, isMobile} = useContext(WarGamesContext)
             return (
     <section>
-            <Container>
-                <div className="main-menu-wrapper">
-          <Title title="Main Menu" />
+            <Container className = "main-menu-wrapper">
+                <div className='col-xs-3'>
+          <Title title="Main Menu"  className = "main-menu-title"/>
               <Row >
                 <Col lg={4} sm={12}>
                 <Link to="/computer-game">
                   <Fade
-                    left={isDesktop}
-                    bottom={isMobile}
+                    left={isMobile}
+                    bottom={isDesktop}
                     duration={1000}
                     delay={500}
                     distance="30px"
@@ -41,18 +41,19 @@ function MainMenu(props) {
                 </Col>
                 <br>
                 </br>
+                <br>
+                </br>
                 <Col lg={8} sm={12}>
                   <Link to="/multiplayer-game">
                   <Fade
-                    right={isDesktop}
-                    bottom={isMobile}
+                    right={isMobile}
+                    bottom={isDesktop}
                     duration={1000}
                     delay={1000}
                     distance="30px"
                   >
                     <div className="multiplayer-option">
                       <Button
-                        // href={url || '#!'}
                         target="_blank"
                         aria-label="Project Link"
                         rel="noopener noreferrer"

@@ -4,35 +4,26 @@ import BattleField from '../BattleField/BattleField';
 import OpponentArea from '../OpponentArea/OpponentArea';
 import PlayerCard from '../PlayerCard/PlayerCard';
 import ScoreBoard from '../ScoreBoard/ScoreBoard';
-import UserArea from '../UserArea/UserArea';
+import FeedbackText from '../FeedbackText/FeedbackText.jsx'
+import UserArea from '../UserArea/UserArea'
 import Swal from 'sweetalert2'
 
 function ComputerMode(props) {
 const {players} = useContext(WarGamesContext)
 
-// const [computerDeck, setComputerDeck] = useState([])
-// const[playerDeck, setPlayerDeck]= useState([])
-
+const [feedbackText, setfeedbackText] = useState(false)
 const [userScore, setuserScore] = useState(0)
 const [opponentScore, setopponentScore] = useState(0)
 const [userPlayer, setUserPlayer] = useState({})
 const [compPlayer, setCompPlayer] = useState({})
 const [battleInSession, setBattleInSession] = useState(false)
 const [flip, setFlip] = useState(false)
-
-    useEffect(()=>{
-
-    }, [])
-
+const [userWinsBattle, setUserWinsBattle] = useState(false)
     const dealCard = ()=>{
         let randomPlayer1 = getRandomPlayer()
         let randomPlayer2 = getRandomPlayer()
-
-        // debugger
-        // setCompPlayer(getRandomPlayer());
         setUserPlayer(randomPlayer1);
         setCompPlayer(randomPlayer2);
-        // displayPlayingCards(userPlayer, compPlayer)
         let userPlayerWar = randomPlayer1['war']
         let compPlayerWar = randomPlayer2['war']
            let userPlayerWarFloat = parseFloat(userPlayerWar)
@@ -46,61 +37,68 @@ const [flip, setFlip] = useState(false)
     window.location.reload(false);
   }
 
+
+    const handleWinner = (winner)=>{
+        if(winner){
+            Swal.fire({
+            title: winner=="user" ? 'You Won!' : 'You Lost',
+            text: 'Play again?',
+            icon: winner=="user" ? 'success' : 'error',
+            confirmButtonText: 'Ok'
+            })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        refreshPage()
+                        }
+                    })
+            }
+
+    }
+
     const handleBattle = (userPlayerWar, compPlayerWar)=>{
-        console.log("handling battle: ", userPlayerWar, compPlayerWar)
         setBattleInSession(true)
         setTimeout(() => {
            
             setBattleInSession(false)
             setFlip(false)
         },
-        3000)
+        4000)
         
 
 setTimeout(() => {
-            console.log("setting score...", userPlayerWar, compPlayerWar)
-            if(userPlayerWar > compPlayerWar){
-               setuserScore(userScore+1)
-                  if(userScore === 2){
-                Swal.fire({
-  title: 'You Won!',
-  text: 'Play again?',
-  icon: 'success',
-  confirmButtonText: 'Ok'
-}).then((result) => {
-  /* Read more about isConfirmed, isDenied below */
-  if (result.isConfirmed) {
-refreshPage()
-  }
-})
-           }
-           }
-           else if(userPlayerWar < compPlayerWar){
-               setopponentScore(opponentScore+1)
-               if(opponentScore === 2){
-      Swal.fire({
-  title: 'You Lose!',
-  text: 'Play again?',
-  icon: 'error',
-  confirmButtonText: 'Ok'
-}).then((result) => {
-  /* Read more about isConfirmed, isDenied below */
-  if (result.isConfirmed) {
-refreshPage()
-  }
-})           }
+    setfeedbackText(false)
+    if(userPlayerWar > compPlayerWar){
+        setUserWinsBattle(true)
+        setuserScore(userScore+1)
+        if(userScore===2){
+            handleWinner("user")   
+        }
+    }
+    else if(userPlayerWar < compPlayerWar){
+        setopponentScore(opponentScore+1)
+        if(opponentScore === 1){
+            handleWinner("opponent") 
+        }
+        return <FeedbackText userPoint = {false}/>
+    }
+},
+        4100)
 
-           }
-        },
-        3100)
-        setTimeout(()=>{
-            setFlip(true)
+    setTimeout(()=>{
+        if(userPlayerWar > compPlayerWar){
+        setUserWinsBattle(true)
+        }
+          else if(userPlayerWar < compPlayerWar){
+              setUserWinsBattle(false)
+          }
+        setfeedbackText(true)
+
+        setFlip(true)
         }, 2000)
     setTimeout(()=>{
-                
-
     }, 3150)    
     }
+    
    const getRandomPlayer = ()=>{
 
        let randomPlayer = players[Math.floor(Math.random() * players.length)]
@@ -109,6 +107,7 @@ refreshPage()
     return (
         <div>
             <ScoreBoard userScore = {userScore} opponentScore={opponentScore}/>
+            {feedbackText ?<FeedbackText userWinsBattle = {userWinsBattle}/> : null}
             <OpponentArea compPlayer = {compPlayer} battleInSession = {battleInSession} flip = {flip}/>
             <BattleField className = "battle-field"  userPlayer= {userPlayer} compPlayer = {compPlayer} battleInSession = {battleInSession}/>
             <UserArea dealCard = {dealCard} userPlayer= {userPlayer} battleInSession = {battleInSession} flip = {flip}/>

@@ -42,8 +42,6 @@
   float: right;
 }
 
-.user-deck{
-}
 .deck{
   background: url('./assets/war-games-card-deck.png');
   background-size: cover;
@@ -61,15 +59,10 @@
 .menu-button{
   height: 80px;
   width: 200px;
-  font-size: large;
+  /* margin-left: 50%; */
+  /* font-size: large; */
 }
-/* button{
-  size: 50px;
-} */
 
-.player-card{
-  
-}
 
 .user-deck{
   margin-bottom: -100px;
@@ -79,6 +72,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  /* display: grid; */
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
@@ -97,26 +91,25 @@
 }
 
 .baseball-card-front{
-  height: 90%;
-  width: 100%;
-  background-color: white;
  transition: transform 0.4s;
   transform-style: preserve-3d;
-/* transform: rotateY('180deg'); */
 }
 
 .baseball-card-back{
-  height: 100%;
-  width: 100%;
+  margin: '.25rem';
     transform: rotateY(-180deg);
-  
+  padding-bottom: -20%;
 }
 .card-header{
-  width: "15rm";
+  /* width: "15rm"; */
 }
 .card-image{
-  height: 80%;
-  width: 80%; 
+  height: 100%;
+  width: 100%; 
+}
+
+.computer-player-card{
+  animation: cardSlide2 2s forwards;
 }
 
 @keyframes cardSlide {
@@ -125,13 +118,24 @@
   }
    to{ transform: translateX(-250%) translateY(-250%)};
 }
+@keyframes cardSlide2 {
+  from {
+    transform: translateX(0%) translateY(0%);
+  }
+   to{ transform: translateX(250%) translateY(250%)};
+}
 @keyframes mobileCardSlide {
   from {
     transform: translateX(0%) translateY(0%);
   }
    to{ transform: translateX(-75%) translateY(-120%)};
 }
-
+@keyframes mobileCardSlide2 {
+  from {
+    transform: translateX(0%) translateY(0%);
+  }
+   to{ transform: translateX(10%) translateY(20%)};
+}
 
 
 
@@ -144,6 +148,8 @@ animation: mobileCardSlide 2s forwards;
 /* height: 100%; */
 }
 
-
+.computer-player-card{
+  animation: mobileCardSlide2 2s forwards;
+}
 
 }
