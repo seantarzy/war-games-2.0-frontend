@@ -42,7 +42,8 @@ const [userWinsBattle, setUserWinsBattle] = useState(false)
             title: winner==="user" ? 'You Won!' : 'You Lost',
             text: 'Play again?',
             icon: winner==="user" ? 'success' : 'error',
-            confirmButtonText: 'Ok'
+            confirmButtonText: 'Ok',
+            allowOutsideClick: ()=>refreshPage()
             })
                 .then((result) => {
                     if (result.isConfirmed) {
