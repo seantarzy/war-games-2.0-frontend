@@ -119,6 +119,19 @@
   animation-fill-mode: forwards;
 }
 
+.loading{
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  margin-right: -50%;
+  margin-bottom: 50%;
+}
+.loading-gif{
+  height: 200%;
+  width: 200%;
+}
+
+
 .computer-player-card{
   animation: cardSlide2 2s forwards;
 }
@@ -164,6 +177,23 @@
 
 @media (max-width: 767px) { 
 
+  .loading{
+  position: absolute;
+  top: 25%;
+  right: 50px;
+  /* left: 100px; */
+  /* left: 25%; */
+  /* margin-right: -50%; */
+  margin-bottom: 50%;
+}
+.loading-gif{
+  height: 50%;
+  width: 55%;
+}
+
+.loading-text{
+  
+}
 .user-player-card{
 top: -150px;
 /* z-index: 1; */
@@ -174,6 +204,8 @@ animation: mobileCardSlide 2s forwards;
 .computer-player-card{
   animation: mobileCardSlide2 2s forwards;
 }
+
+
 
 .feedback-text-win {
   animation: feedbackFade 2s;

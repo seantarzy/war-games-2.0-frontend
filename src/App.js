@@ -24,6 +24,9 @@ class App extends React.Component{
     .then((players)=>{
         this.setState({players});
     })
+    if(this.state.players.length){
+      console.log("players")
+    }
         if (window.innerWidth > 769) {
           this.setState({isDesktop: true});
         } else {

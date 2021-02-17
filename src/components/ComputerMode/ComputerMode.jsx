@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import WarGamesContext from '../../Context/context';
 import OpponentArea from '../OpponentArea/OpponentArea';
 import ScoreBoard from '../ScoreBoard/ScoreBoard';
@@ -6,9 +6,14 @@ import FeedbackText from '../FeedbackText/FeedbackText.jsx'
 import UserArea from '../UserArea/UserArea'
 import BattleField from '../BattleField/BattleField'
 import Swal from 'sweetalert2'
+import Loading1 from '../../assets/loading1.gif'
 
 function ComputerMode() {
 const {players} = useContext(WarGamesContext)
+
+useEffect(()=>{
+    console.log("players: ", players)
+}, [])
 
 const [feedbackText, setfeedbackText] = useState(false)
 const [userScore, setuserScore] = useState(0)
@@ -101,12 +106,23 @@ const [userWinsBattle, setUserWinsBattle] = useState(false)
    }
     return (
         <div>
+
+        {players.length > 0 ? 
+        <>
             <ScoreBoard userScore = {userScore} opponentScore={opponentScore}/>
             {feedbackText ?<FeedbackText userWinsBattle = {userWinsBattle}/> : null}
             <OpponentArea compPlayer = {compPlayer} battleInSession = {battleInSession} flip = {flip}/>
             <BattleField className = "battle-field" />
             <UserArea dealCard = {dealCard} userPlayer= {userPlayer} battleInSession = {battleInSession} flip = {flip}/>
-        </div>
+            </>
+            :
+            <div className = "loading">
+            <h2>
+                Getting Players...
+                </h2> 
+            <img src = {Loading1} className = "loading-gif"/>
+                </div>}
+            </div>
     );
 }
 
