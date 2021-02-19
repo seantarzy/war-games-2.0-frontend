@@ -18,6 +18,10 @@ function PlayerCard(props) {
     War: {props.player.war}
   </Card.Footer>
       </Card>
+       : props.statFlip ? 
+    <Card className="baseball-card-full-stats">
+        <Card.Body>Stats</Card.Body>
+      </Card>
     :
     <Card className = "baseball-card-back" style={{ width: '9rem', height: '14rem'}} >
 <Image className = "card-image" src={baseballCardBack} />

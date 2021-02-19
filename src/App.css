@@ -136,6 +136,10 @@
   animation: cardSlide2 2s forwards;
 }
 
+.baseball-card-full-stats{
+    transform: rotateY(-180deg);
+}
+
 .coming-soon-text{
   animation: regularFadeIn 2s;
 }
@@ -181,9 +185,6 @@
   position: absolute;
   top: 25%;
   right: 50px;
-  /* left: 100px; */
-  /* left: 25%; */
-  /* margin-right: -50%; */
   margin-bottom: 50%;
 }
 .loading-gif{
