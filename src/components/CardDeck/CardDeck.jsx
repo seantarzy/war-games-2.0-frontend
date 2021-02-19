@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import {Button, ButtonToolbar} from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function CardDeck(props) {
@@ -14,9 +13,9 @@ function CardDeck(props) {
     return (
         <div className = "deck" >
             {props.userDeck ? 
-            <ButtonToolbar >
-                <Button className = "deal-deck-button" color="primary" variant = "primary" onClick = {props.dealCard}>Deal Card </Button>
-            </ButtonToolbar>
+
+            <p>My deck</p>
+         
             :
             null
         }

@@ -26,15 +26,21 @@ const [userWinsBattle, setUserWinsBattle] = useState(false)
 
 
     const dealCard = ()=>{
+        setFlip(false)
+        setBattleInSession(false)
+        setUserPlayer({})
+        setCompPlayer({})
         let randomPlayer1 = getRandomPlayer()
         let randomPlayer2 = getRandomPlayer()
-        setUserPlayer(randomPlayer1);
-        setCompPlayer(randomPlayer2);
-        let userPlayerWar = randomPlayer1['war']
-        let compPlayerWar = randomPlayer2['war']
-           let userPlayerWarFloat = parseFloat(userPlayerWar)
-           let compPlayerWarFloat = parseFloat(compPlayerWar)
-        handleBattle(userPlayerWarFloat, compPlayerWarFloat)
+            setUserPlayer(randomPlayer1);
+            setCompPlayer(randomPlayer2);
+            let userPlayerWar = randomPlayer1['war']
+            let compPlayerWar = randomPlayer2['war']
+               let userPlayerWarFloat = parseFloat(userPlayerWar)
+               let compPlayerWarFloat = parseFloat(compPlayerWar)
+               setTimeout(()=>{
+                   handleBattle(userPlayerWarFloat, compPlayerWarFloat)
+               }, 100)
     }
 
     function refreshPage() {
@@ -88,8 +94,6 @@ const [userWinsBattle, setUserWinsBattle] = useState(false)
             }, 2000)
 
         setTimeout(() => {
-            setBattleInSession(false)
-            setFlip(false)
         },
         4000)
 
@@ -113,7 +117,7 @@ const [userWinsBattle, setUserWinsBattle] = useState(false)
             {feedbackText ?<FeedbackText userWinsBattle = {userWinsBattle}/> : null}
             <OpponentArea compPlayer = {compPlayer} battleInSession = {battleInSession} flip = {flip}/>
             <BattleField className = "battle-field" />
-            <UserArea dealCard = {dealCard} userPlayer= {userPlayer} battleInSession = {battleInSession} flip = {flip}/>
+            <UserArea dealCard = {dealCard} userPlayer= {userPlayer} battleInSession = {battleInSession} flip = {flip} score = {userScore + opponentScore} />
             </>
             :
             <div className = "loading">

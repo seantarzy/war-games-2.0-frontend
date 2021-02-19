@@ -30,14 +30,23 @@
   height: 350px;
   width: 200px;
 }
-.deal-deck-button {
-  margin-top: 175px;
+.deal-card-button {
+  font-size: 100px;
   flex: 1;
   justify-content: 'flex-end';
-  margin-bottom: 36;
+  font-weight: bold;
 }
 .user-area{
   float: right;
+}
+
+.deal-card-wrapper{
+  position: absolute;
+  left: 25%;
+  top: 75%;
+  height: 100px;
+  width: 300px;
+  font-weight: bold;
 }
 
 .deck{
@@ -86,9 +95,14 @@
   animation: cardSlide 2s forwards;
 }
 
-.baseball-card-front{
+.baseball-card-front  {
  transition: transform 0.4s;
   transform-style: preserve-3d;
+}
+
+.baseball-card-front-with-stats{
+    padding: -20%;
+
 }
 
 .baseball-card-back{
@@ -137,7 +151,8 @@
 }
 
 .baseball-card-full-stats{
-    transform: rotateY(-180deg);
+  transition: transform 0.4s;
+  transform-style: preserve-3d;
 }
 
 .coming-soon-text{
