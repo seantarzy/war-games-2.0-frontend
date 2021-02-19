@@ -23,9 +23,12 @@ const [compPlayer, setCompPlayer] = useState({})
 const [battleInSession, setBattleInSession] = useState(false)
 const [flip, setFlip] = useState(false)
 const [userWinsBattle, setUserWinsBattle] = useState(false)
-
-
+const [cardsRevealed, setCardsRevealed] = useState(false)
+const [gameStart, setGameStart] = useState(false)
+ 
     const dealCard = ()=>{
+        setGameStart(true)
+        setCardsRevealed(false)
         setFlip(false)
         setBattleInSession(false)
         setUserPlayer({})
@@ -91,11 +94,13 @@ const [userWinsBattle, setUserWinsBattle] = useState(false)
               }
             setfeedbackText(true)
             setFlip(true)
+
             }, 2000)
 
         setTimeout(() => {
+                        setCardsRevealed(true)
         },
-        4000)
+        3000)
 
         setTimeout(() => {
             handleBattlePoint(userPlayerWar,compPlayerWar)
@@ -117,7 +122,7 @@ const [userWinsBattle, setUserWinsBattle] = useState(false)
             {feedbackText ?<FeedbackText userWinsBattle = {userWinsBattle}/> : null}
             <OpponentArea compPlayer = {compPlayer} battleInSession = {battleInSession} flip = {flip}/>
             <BattleField className = "battle-field" />
-            <UserArea dealCard = {dealCard} userPlayer= {userPlayer} battleInSession = {battleInSession} flip = {flip} score = {userScore + opponentScore} />
+            <UserArea dealCard = {dealCard} userPlayer= {userPlayer} battleInSession = {battleInSession} flip = {flip} score = {userScore + opponentScore} cardsRevealed= {cardsRevealed} gameStart= {gameStart} />
             </>
             :
             <div className = "loading">

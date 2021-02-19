@@ -43,22 +43,22 @@ function PlayerCard(props) {
         <Card.Subtitle>Career Stats</Card.Subtitle>
         {props.player.role === "hitter" ? 
         <Card.Body>
-          <Card.Text>AB...{props.player.at_bats}</Card.Text>
-          <Card.Text>Runs...{props.player.runs}</Card.Text>
-          <Card.Text>Hits...{props.player.hits}</Card.Text>
-          <Card.Text>Hrs...{props.player.hr}</Card.Text>
-          <Card.Text>RBI...{props.player.rbi}</Card.Text>
-          <Card.Text>Avg....{props.player.avg}</Card.Text>
-          <Card.Text>SB...{props.player.stolen_bases}</Card.Text>
+          <Card.Text>AB: {props.player.at_bats}</Card.Text>
+          <Card.Text>Runs: {props.player.runs}</Card.Text>
+          <Card.Text>Hits: {props.player.hits}</Card.Text>
+          <Card.Text>Hrs: {props.player.hr}</Card.Text>
+          <Card.Text>RBI: {props.player.rbi}</Card.Text>
+          <Card.Text>Avg: {props.player.avg}</Card.Text>
+          <Card.Text>SB: {props.player.stolen_bases}</Card.Text>
         </Card.Body>
       :
          <Card.Body>
-          <Card.Text>W...{props.player.wins}</Card.Text>
-          <Card.Text>L...{props.player.losses}</Card.Text>
-          <Card.Text>ERA...{props.player.era}</Card.Text>
-          <Card.Text>SO...{props.player.strikeouts}</Card.Text>
-          <Card.Text>Sv...{props.player.saves}</Card.Text>
-          <Card.Text>IP....{props.player.ip}</Card.Text>
+          <Card.Text>W: {props.player.wins}</Card.Text>
+          <Card.Text>L: {props.player.losses}</Card.Text>
+          <Card.Text>ERA: {props.player.era}</Card.Text>
+          <Card.Text>SO: {props.player.strikeouts}</Card.Text>
+          <Card.Text>Sv: {props.player.saves}</Card.Text>
+          <Card.Text>IP: {props.player.ip}</Card.Text>
         </Card.Body>
       }
 

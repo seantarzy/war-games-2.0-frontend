@@ -33,7 +33,6 @@
 .deal-card-button {
   font-size: 100px;
   flex: 1;
-  justify-content: 'flex-end';
   font-weight: bold;
 }
 .user-area{
@@ -42,7 +41,7 @@
 
 .deal-card-wrapper{
   position: absolute;
-  left: 25%;
+  left: 40%;
   top: 75%;
   height: 100px;
   width: 300px;
@@ -207,8 +206,13 @@
   width: 55%;
 }
 
-.loading-text{
-  
+.deal-card-wrapper{
+  position: absolute;
+  left: 20%;
+  top: 50%;
+  height: 60px;
+  width: 250px;
+  font-weight: bold;
 }
 .user-player-card{
 top: -150px;
