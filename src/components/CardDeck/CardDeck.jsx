@@ -3,22 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function CardDeck(props) {
 
-    useEffect(()=>{
-        if(props.userDeck){ 
-       let deck = document.getElementsByClassName('deck')[0]
-       deck.classList.add("user-deck")
-         }
-    })
-
     return (
-        <div className = "deck" >
-            {props.userDeck ? 
-
-            <p>My deck</p>
-         
-            :
-            null
-        }
+        <div className = {props.userDeck ? "user-deck" : "opponent-deck"} >
+           
         </div>
     );
 }

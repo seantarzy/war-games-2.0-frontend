@@ -20,7 +20,7 @@ function UserArea(props) {
             <PlayerCard className = "user-player-card" player = {props.userPlayer} userPlayer = {true} flip = {props.flip}/>
             :
             null}
-            <CardDeck userDeck = {true} dealCard = {props.dealCard} className = "user-deck"/>
+            <CardDeck userDeck = {true} dealCard = {props.dealCard} />
         </section>
     );
 }

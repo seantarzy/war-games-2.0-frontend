@@ -46,8 +46,8 @@ function PlayerCard(props) {
         <Card.Header className = "card-Header" >{props.player.name}</Card.Header>
         <Card.Subtitle>Career Stats</Card.Subtitle>
         {props.player.role === "hitter" ? 
-        <Card.Body>
-          <Card.Text>AB: {props.player.at_bats}</Card.Text>
+        <Card.Body className= "stats">
+          <Card.Text>AB: {props.player.at_bats} </Card.Text>
           <Card.Text>Runs: {props.player.runs}</Card.Text>
           <Card.Text>Hits: {props.player.hits}</Card.Text>
           <Card.Text>Hrs: {props.player.hr}</Card.Text>
@@ -56,7 +56,7 @@ function PlayerCard(props) {
           <Card.Text>SB: {props.player.stolen_bases}</Card.Text>
         </Card.Body>
       :
-         <Card.Body>
+         <Card.Body className= "stats">
           <Card.Text>W: {props.player.wins}</Card.Text>
           <Card.Text>L: {props.player.losses}</Card.Text>
           <Card.Text>ERA: {props.player.era}</Card.Text>
