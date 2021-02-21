@@ -95,15 +95,26 @@
 }
 
 .baseball-card-front  {
+  border: 5px solid black;
  transition: transform 0.4s;
   transform-style: preserve-3d;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .baseball-card-front-with-stats{
+  -moz-transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+    transform: rotateY(-180deg);
     padding: -20%;
-
 }
-
+.text-flip{
+    -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
 .baseball-card-back{
   margin: '.25rem';
     transform: rotateY(-180deg);
@@ -216,12 +227,14 @@
 }
 .user-player-card{
 top: -150px;
-/* z-index: 1; */
+ height: '10rem';
+  width: '8rem';
 animation: mobileCardSlide 2s forwards;
-/* height: 100%; */
 }
 
 .computer-player-card{
+  height: '10rem';
+  width: '8rem';
   animation: mobileCardSlide2 2s forwards;
 }
 

@@ -28,13 +28,17 @@ function PlayerCard(props) {
     >
       {props.flip && !viewStats ?
       <Card className = "baseball-card-front"  onClick = {flipToStats}>
+        <div className = "text-flip">
     <Card.Header className = "card-Header">{props.player.name}</Card.Header>
+        </div>
   <Card.Body>
     <Image className = "card-image" src = {props.player.image}/>
   </Card.Body>
+  <div className = "text-flip">
   <Card.Footer>
     War: {props.player.war}
   </Card.Footer>
+  </div>
       </Card>
        : props.flip && viewStats ? 
     <Card className="baseball-card-full-stats" onClick = {flipBackToFront}>
