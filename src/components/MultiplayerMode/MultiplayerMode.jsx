@@ -4,25 +4,38 @@ import {PubNubProvider} from 'pubnub-react'
 import UserArea from '../UserArea/UserArea'
 import WarGamesContext from '../../Context/context';
 import MultiplayerLobby from '../MultiplayerLobby/MultiplayerLobby';
+import { render } from '@testing-library/react';
 
 
-function MultiplayerMode(props) {
-const {players} = useContext(WarGamesContext)
-const [subscribed,setsubscribed] = useState(false)
-const [gameStart, setGameStart] = useState(false)
+class MultiplayerMode extends React.Component{
 
-    const pubnub = new PubNub({
+    state = {
+        gameStart: false,
+        roomId: null,
+    }
+
+    pubnub = new PubNub({
         publishKey: process.env.REACT_APP_PUBNUB_PUBLISH_KEY,
         subscribeKey: process.env.REACT_APP_PUBNUB_SUBSCRIBE_KEY
     })
+    
+    startGameAndSubscribe = (roomId)=>{
+        this.setState({gameStart: true, roomId})
+        this.pubnub.subscribe({
+            channels: [`wargames${roomId}`],
+            withPresence: true
+        })
+    }
+    render(){
     return (
-        <PubNubProvider client = {pubnub}>
-            {gameStart ?
+        <PubNubProvider client = {this.pubnub} >
+            {this.state.gameStart ?
             <UserArea/>
             :
-            <MultiplayerLobby setGameStart = {setGameStart}/>}
+            <MultiplayerLobby startGameAndSubscribe = {this.startGameAndSubscribe} pubnub = {this.pubnub}/>}
         </PubNubProvider>
     );
+            }
 }
 
 export default MultiplayerMode;

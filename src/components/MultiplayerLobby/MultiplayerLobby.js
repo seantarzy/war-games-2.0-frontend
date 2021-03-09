@@ -6,39 +6,41 @@ import Title from "../../Title/Title";
 import shortid from "shortid";
 import Swal from "sweetalert2";
 import { usePubNub } from "pubnub-react";
+import pubnub from 'pubnub'
+import { render } from '@testing-library/react';
 
-function MultiplayerLobby(props) {
-        const { isDesktop, isMobile } = useContext(WarGamesContext);
-        const pubnub = usePubNub();
-        const [roomId, setRoomId] = useState("test-room")
-        const joinRoom=(value)=>{
-            setRoomId(value)
-              pubnub
+class MultiplayerLobby extends React.Component {
+
+    state = {
+        isDesktop: true,
+        isMobile: false,
+        roomId: "test-room"
+    }
+        joinRoom=(value)=>{
+              this.props.pubnub
                 .hereNow({
                   channels: [`wargames${value}`],
                 })
                 .then((response) => {
                   if (response.totalOccupancy < 2) {
-                    pubnub.subscribe({
-                      channels: [`wargames${roomId}`],
+                    this.props.pubnub.subscribe({
+                      channels: [`wargames${value}`],
                       withPresence: true,
                     });
-                    pubnub.publish({
+                    this.props.pubnub.publish({
                       message: {
                         notRoomCreator: true,
                       },
-                      channel: `wargames${roomId}`,
+                      channel: `wargames${value}`,
                     });
                   }
-                })
-                .then(()=>{
-
                 })
                 .catch((error) => {
                   console.log(error);
                 });
         }
-     const handleJoinRoom = (e) => {
+      handleJoinRoom = (e) => {
+         let newRoomId;
           Swal.fire({
             position: "top",
             input: "text",
@@ -58,37 +60,42 @@ function MultiplayerLobby(props) {
           })
             .then((result) => {
               if (result.value) {
-                joinRoom(result.value);
+                  newRoomId = result.value
+                this.setState({roomId: result.value});
+                this.joinRoom(result.value);
               }
             })
-            .then(pubnub.addListener({ message: handleMessage}))
+            .then(this.props.pubnub.addListener({ message: this.handleMessage}))
             .then(()=>{
-                console.log("subscribed: ",pubnub)
-
-            })
-            ;
+                  this.props.pubnub.hereNow({
+                    channels: [`wargames${newRoomId}`],
+                  })
+                  .then((response)=>{
+                      console.log(response.totalOccupancy)
+                    })
+                })
+                    
         };
 
-        const createRoomAndSubscribe = ()=>{
+        createRoomAndSubscribe = ()=>{
             let newRoomId = shortid.generate().substring(0, 5);
-           setRoomId(newRoomId);
-            console.log("room id: ",roomId)
-            pubnub.subscribe({
+           this.setState({roomId: newRoomId});
+            this.props.pubnub.subscribe({
               channels: [`wargames${newRoomId}`],
               withPresence: true,
             })
         }
 
-    const handleCreateRoom = ()=>{
-        if(!roomId){
-                createRoomAndSubscribe()
+     handleCreateRoom = ()=>{
+        if(!this.state.roomId){
+                this.createRoomAndSubscribe()
         }
-                if(roomId){
+                if(this.state.roomId){
             Swal.fire({
             position: "middle",
             allowOutsideClick: false,
             title: "Share this room ID with your friend",
-            text: roomId,
+            text: this.state.roomId,
             width: 275,
             padding: "0.7em",
             customClass: {
@@ -100,29 +107,29 @@ function MultiplayerLobby(props) {
             }
             )
             .then(()=>  
-            pubnub.addListener({ message: handleMessage})
+            this.props.pubnub.addListener({ message: this.handleMessage})
             )
         }
    
     }
 
-    const publishMessage = ()=>{
-        pubnub.publish({
-          message: "yo from pubnub",
-          channel: `wargames${roomId}`,
+     publishMessage = ()=>{
+        this.props.pubnub.publish({
+          message: "yo from this.props.pubnub",
+          channel: `wargames${this.state.roomId}`,
         });
     }
 
-    const handleMessage = (event) => {
+     handleMessage = (event) => {
             console.log("received", event);
            };
-    useEffect(()=>{
-        pubnub.subscribe({channels: [`wargames${roomId}`]})
-        pubnub.addListener({message: handleMessage})
-        createRoomAndSubscribe()
-    },[])
+    componentDidMount = ()=>{
+        this.props.pubnub.subscribe({channels: [`wargames${this.state.roomId}`]})
+        this.props.pubnub.addListener({message: this.handleMessage})
+        this.createRoomAndSubscribe()
+    }
 
-
+render(){
     return (
       <div>
         <section>
@@ -132,8 +139,8 @@ function MultiplayerLobby(props) {
               <Row>
                 <Col lg={4} sm={12}>
                   <Fade
-                    left={isMobile}
-                    bottom={isDesktop}
+                    left={this.state.isMobile}
+                    bottom={this.state.isDesktop}
                     duration={1000}
                     delay={500}
                     distance="30px"
@@ -145,7 +152,7 @@ function MultiplayerLobby(props) {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="menu-button"
-                        onClick={handleJoinRoom}
+                        onClick={this.handleJoinRoom}
                       >
                         <h3 className="computer-option-button-text">
                           Join Room
@@ -159,8 +166,8 @@ function MultiplayerLobby(props) {
                 <br></br>
                 <Col lg={8} sm={12}>
                   <Fade
-                    right={isMobile}
-                    bottom={isDesktop}
+                    right={this.state.isMobile}
+                    bottom={this.state.isDesktop}
                     duration={1000}
                     delay={1000}
                     distance="30px"
@@ -171,14 +178,14 @@ function MultiplayerLobby(props) {
                         aria-label="Project Link"
                         rel="noopener noreferrer"
                         className="menu-button"
-                        onClick={handleCreateRoom}
+                        onClick={this.handleCreateRoom}
                       >
                         <h3 className="omputer-option-button-text">
                           Create Room
                         </h3>
                       </Button>
-                      <Button onClick = {publishMessage}>
-                          Test pubnub
+                      <Button onClick = {this.publishMessage}>
+                          Test this.props.pubnub
                       </Button>
                     </div>
                   </Fade>
@@ -189,6 +196,7 @@ function MultiplayerLobby(props) {
         </section>
       </div>
     );
+}
 }
 
 export default MultiplayerLobby;
