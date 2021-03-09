@@ -5,33 +5,35 @@ import Fade from "react-reveal/Fade";
 import Title from "../../Title/Title";
 import shortid from "shortid";
 import Swal from "sweetalert2";
-import { usePubNub } from "pubnub-react";
-import pubnub from 'pubnub'
-import { render } from '@testing-library/react';
 
 class MultiplayerLobby extends React.Component {
 
     state = {
         isDesktop: true,
         isMobile: false,
-        roomId: "test-room"
+        roomId: "test-room",
+        lobbyChannel: null,
     }
-        joinRoom=(value)=>{
+        joinRoom=()=>{
               this.props.pubnub
                 .hereNow({
-                  channels: [`wargames${value}`],
+                  channels: [this.state.lobbyChannel],
                 })
                 .then((response) => {
                   if (response.totalOccupancy < 2) {
                     this.props.pubnub.subscribe({
-                      channels: [`wargames${value}`],
+                      channels: [this.state.lobbyChannel],
                       withPresence: true,
                     });
+                    this.props.pubnub.addListener({
+                        message: this.handleMessage,
+                    });
+
                     this.props.pubnub.publish({
                       message: {
                         notRoomCreator: true,
                       },
-                      channel: `wargames${value}`,
+                      channel: this.state.lobbyChannel,
                     });
                   }
                 })
@@ -40,7 +42,6 @@ class MultiplayerLobby extends React.Component {
                 });
         }
       handleJoinRoom = (e) => {
-         let newRoomId;
           Swal.fire({
             position: "top",
             input: "text",
@@ -60,37 +61,45 @@ class MultiplayerLobby extends React.Component {
           })
             .then((result) => {
               if (result.value) {
-                  newRoomId = result.value
-                this.setState({roomId: result.value});
-                this.joinRoom(result.value);
+                this.setState({
+                  roomId: result.value,
+                  lobbyChannel: `wargames${result.value}`,
+                });
+                this.joinRoom();
               }
             })
-            .then(this.props.pubnub.addListener({ message: this.handleMessage}))
             .then(()=>{
-                  this.props.pubnub.hereNow({
-                    channels: [`wargames${newRoomId}`],
-                  })
-                  .then((response)=>{
-                      console.log(response.totalOccupancy)
+                console.log("adding listener")
+            
+            })
+            .then(()=>{
+                  this.props.pubnub
+                    .hereNow({
+                      channels: [this.state.lobbyChannel],
                     })
+                    .then((response) => {
+                      console.log(response.totalOccupancy);
+                    });
                 })
                     
         };
 
         createRoomAndSubscribe = ()=>{
+        this.props.pubnub.addListener({
+                          message: this.handleMessage,
+                        });
+            console.log("subscribing")
             let newRoomId = shortid.generate().substring(0, 5);
-           this.setState({roomId: newRoomId});
+           this.setState({roomId: newRoomId, lobbyChannel: `wargames${newRoomId}`});
             this.props.pubnub.subscribe({
               channels: [`wargames${newRoomId}`],
               withPresence: true,
-            })
+            });
         }
 
      handleCreateRoom = ()=>{
-        if(!this.state.roomId){
-                this.createRoomAndSubscribe()
-        }
-                if(this.state.roomId){
+        this.createRoomAndSubscribe()
+        setTimeout(()=>{
             Swal.fire({
             position: "middle",
             allowOutsideClick: false,
@@ -106,17 +115,13 @@ class MultiplayerLobby extends React.Component {
             },
             }
             )
-            .then(()=>  
-            this.props.pubnub.addListener({ message: this.handleMessage})
-            )
-        }
-   
+        },500)
     }
 
      publishMessage = ()=>{
         this.props.pubnub.publish({
           message: "yo from this.props.pubnub",
-          channel: `wargames${this.state.roomId}`,
+          channel: this.state.lobbyChannel,
         });
     }
 
@@ -124,11 +129,12 @@ class MultiplayerLobby extends React.Component {
             console.log("received", event);
            };
     componentDidMount = ()=>{
-        this.props.pubnub.subscribe({channels: [`wargames${this.state.roomId}`]})
-        this.props.pubnub.addListener({message: this.handleMessage})
-        this.createRoomAndSubscribe()
+        // this.createRoomAndSubscribe()
     }
 
+    // componentDidUpdate = ()=>{
+
+    // }
 render(){
     return (
       <div>
