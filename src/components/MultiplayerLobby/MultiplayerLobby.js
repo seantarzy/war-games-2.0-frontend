@@ -32,7 +32,7 @@ function MultiplayerLobby(props) {
                   }
                 })
                 .then(()=>{
-                    
+
                 })
                 .catch((error) => {
                   console.log(error);
@@ -61,7 +61,11 @@ function MultiplayerLobby(props) {
                 joinRoom(result.value);
               }
             })
-            .then(pubnub.addListener({ message: handleMessage}));
+            .then(pubnub.addListener({ message: handleMessage}))
+            .then(()=>{
+                
+            })
+            ;
         };
 
         const createRoomAndSubscribe = ()=>{
