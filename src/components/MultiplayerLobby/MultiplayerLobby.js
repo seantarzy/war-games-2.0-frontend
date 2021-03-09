@@ -13,6 +13,7 @@ class MultiplayerLobby extends React.Component {
         isMobile: false,
         roomId: "test-room",
         lobbyChannel: null,
+        gameChannel: null
     }
         joinRoom=()=>{
               this.props.pubnub
@@ -63,7 +64,7 @@ class MultiplayerLobby extends React.Component {
               if (result.value) {
                 this.setState({
                   roomId: result.value,
-                  lobbyChannel: `wargames${result.value}`,
+                  lobbyChannel: `lobby-channel-${result.value}`,
                 });
                 this.joinRoom();
               }
@@ -90,9 +91,9 @@ class MultiplayerLobby extends React.Component {
                         });
             console.log("subscribing")
             let newRoomId = shortid.generate().substring(0, 5);
-           this.setState({roomId: newRoomId, lobbyChannel: `wargames${newRoomId}`});
+           this.setState({roomId: newRoomId, lobbyChannel: `lobby-channel-${newRoomId}`});
             this.props.pubnub.subscribe({
-              channels: [`wargames${newRoomId}`],
+              channels: [`lobby-channel-${newRoomId}`],
               withPresence: true,
             });
         }
@@ -118,23 +119,36 @@ class MultiplayerLobby extends React.Component {
         },500)
     }
 
-     publishMessage = ()=>{
+     publishMessage = (newMessage)=>{
         this.props.pubnub.publish({
-          message: "yo from this.props.pubnub",
+          message: newMessage,
           channel: this.state.lobbyChannel,
         });
     }
 
      handleMessage = (event) => {
-            console.log("received", event);
+            console.log("received", event)
+            if(event.message.notRoomCreator){
+                this.props.startGameAndSubscribe(this.state.roomId)
+                console.log("game start")
+            }
            };
     componentDidMount = ()=>{
         // this.createRoomAndSubscribe()
     }
 
-    // componentDidUpdate = ()=>{
-
-    // }
+    componentDidUpdate = ()=>{
+         if (this.state.lobbyChannel != null) {
+             console.log("updating component", this.props.pubnub)
+              this.props.pubnub
+                .hereNow({
+                  channels: [this.state.lobbyChannel],
+                })
+                .then((response) => {
+                  console.log(response.totalOccupancy);
+                });
+         }
+    }
 render(){
     return (
       <div>
@@ -190,7 +204,7 @@ render(){
                           Create Room
                         </h3>
                       </Button>
-                      <Button onClick = {this.publishMessage}>
+                      <Button onClick = {()=>this.publishMessage("test")}>
                           Test this.props.pubnub
                       </Button>
                     </div>
