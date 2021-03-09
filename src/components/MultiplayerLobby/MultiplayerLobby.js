@@ -63,7 +63,8 @@ function MultiplayerLobby(props) {
             })
             .then(pubnub.addListener({ message: handleMessage}))
             .then(()=>{
-                
+                console.log("subscribed: ",pubnub)
+
             })
             ;
         };
@@ -108,7 +109,7 @@ function MultiplayerLobby(props) {
     const publishMessage = ()=>{
         pubnub.publish({
           message: "yo from pubnub",
-          channel: `yo`,
+          channel: `wargames${roomId}`,
         });
     }
 
@@ -116,7 +117,7 @@ function MultiplayerLobby(props) {
             console.log("received", event);
            };
     useEffect(()=>{
-        pubnub.subscribe({channels: ["yo"]})
+        pubnub.subscribe({channels: [`wargames${roomId}`]})
         pubnub.addListener({message: handleMessage})
         createRoomAndSubscribe()
     },[])
