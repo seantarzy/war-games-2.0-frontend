@@ -16,6 +16,7 @@ class MultiplayerLobby extends React.Component {
         gameChannel: null
     }
         joinRoom=()=>{
+            this.props.setMyTurn(false);
               this.props.pubnub
                 .hereNow({
                   channels: [this.state.lobbyChannel],
@@ -44,7 +45,7 @@ class MultiplayerLobby extends React.Component {
         }
       handleJoinRoom = (e) => {
           Swal.fire({
-            position: "top",
+            position: "middle",
             input: "text",
             allowOutsideClick: false,
             inputPlaceholder: "Enter the room id",
@@ -129,8 +130,8 @@ class MultiplayerLobby extends React.Component {
      handleMessage = (event) => {
             console.log("received", event)
             if(event.message.notRoomCreator){
+                console.log("game start yo")
                 this.props.startGameAndSubscribe(this.state.roomId)
-                console.log("game start")
             }
            };
     componentDidMount = ()=>{

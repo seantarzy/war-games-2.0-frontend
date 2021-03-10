@@ -6,7 +6,7 @@ function OpponentArea(props) {
         <div>
             <CardDeck/>
              {props.battleInSession ? 
-            <PlayerCard className = "computer-player-card" player = {props.compPlayer} compPlayer = {true} flip = {props.flip}/>
+            <PlayerCard className = "computer-player-card" player = {props.opponentPlayer} compPlayer = {true} flip = {props.flip}/>
             :
             null}
         </div>

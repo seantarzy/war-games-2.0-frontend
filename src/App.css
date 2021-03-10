@@ -112,10 +112,18 @@
     transform: rotateY(-180deg);
     padding: -20%;
 }
+
 .text-flip{
     -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
+
+.whose-turn{
+  position: absolute;
+  top: 700px;
+  left: 680px;
+}
+
 .baseball-card-back{
   margin: '.25rem';
     transform: rotateY(-180deg);

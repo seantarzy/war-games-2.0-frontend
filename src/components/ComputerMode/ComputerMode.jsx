@@ -19,7 +19,7 @@ const [feedbackText, setfeedbackText] = useState(false)
 const [userScore, setuserScore] = useState(0)
 const [opponentScore, setopponentScore] = useState(0)
 const [userPlayer, setUserPlayer] = useState({})
-const [compPlayer, setCompPlayer] = useState({})
+const [opponentPlayer, setOpponentPlayer] = useState({})
 const [battleInSession, setBattleInSession] = useState(false)
 const [flip, setFlip] = useState(false)
 const [userWinsBattle, setUserWinsBattle] = useState(false)
@@ -32,17 +32,17 @@ const [gameStart, setGameStart] = useState(false)
         setFlip(false)
         setBattleInSession(false)
         setUserPlayer({})
-        setCompPlayer({})
+        setOpponentPlayer({})
         let randomPlayer1 = getRandomPlayer()
         let randomPlayer2 = getRandomPlayer()
             setUserPlayer(randomPlayer1);
-            setCompPlayer(randomPlayer2);
+            setOpponentPlayer(randomPlayer2);
             let userPlayerWar = randomPlayer1['war']
-            let compPlayerWar = randomPlayer2['war']
+            let OpponentPlayerWar = randomPlayer2['war']
                let userPlayerWarFloat = parseFloat(userPlayerWar)
-               let compPlayerWarFloat = parseFloat(compPlayerWar)
+               let opponentPlayerWarFloat = parseFloat(OpponentPlayerWar)
                setTimeout(()=>{
-                   handleBattle(userPlayerWarFloat, compPlayerWarFloat)
+                   handleBattle(userPlayerWarFloat, opponentPlayerWarFloat)
                }, 100)
     }
 
@@ -83,13 +83,13 @@ const [gameStart, setGameStart] = useState(false)
         }
     }
 
-    const handleBattle = (userPlayerWar, compPlayerWar)=>{
+    const handleBattle = (userPlayerWar, opponentPlayerWar)=>{
         setBattleInSession(true)
         setTimeout(()=>{
-            if(userPlayerWar > compPlayerWar){
+            if(userPlayerWar > opponentPlayerWar){
             setUserWinsBattle(true)
             }
-              else if(userPlayerWar < compPlayerWar){
+              else if(userPlayerWar < opponentPlayerWar){
                   setUserWinsBattle(false)
               }
             setfeedbackText(true)
@@ -103,7 +103,7 @@ const [gameStart, setGameStart] = useState(false)
         3000)
 
         setTimeout(() => {
-            handleBattlePoint(userPlayerWar,compPlayerWar)
+            handleBattlePoint(userPlayerWar,opponentPlayerWar)
             setfeedbackText(false)
         },
         4100)
@@ -120,7 +120,7 @@ const [gameStart, setGameStart] = useState(false)
         <>
             <ScoreBoard userScore = {userScore} opponentScore={opponentScore}/>
             {feedbackText ?<FeedbackText userWinsBattle = {userWinsBattle}/> : null}
-            <OpponentArea compPlayer = {compPlayer} battleInSession = {battleInSession} flip = {flip}/>
+            <OpponentArea opponentPlayer = {opponentPlayer} battleInSession = {battleInSession} flip = {flip}/>
             <BattleField className = "battle-field" />
             <UserArea dealCard = {dealCard} userDeck = {true} userPlayer= {userPlayer} battleInSession = {battleInSession} flip = {flip} score = {userScore + opponentScore} cardsRevealed= {cardsRevealed} gameStart= {gameStart} />
             </>

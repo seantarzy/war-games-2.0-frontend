@@ -44,7 +44,7 @@ class App extends React.Component{
       <ComputerMode computerDeck = {this.state.computerDeck}/>
       </Route>
       <Route path = "/multiplayer-game">
-        <MultiplayerMode/>
+        <MultiplayerMode players = {this.state.players}/>
       </Route>
       <Route path = "/" >
       <MainMenu/>
