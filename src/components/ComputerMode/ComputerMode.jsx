@@ -122,7 +122,7 @@ const [gameStart, setGameStart] = useState(false)
             {feedbackText ?<FeedbackText userWinsBattle = {userWinsBattle}/> : null}
             <OpponentArea opponentPlayer = {opponentPlayer} battleInSession = {battleInSession} flip = {flip}/>
             <BattleField className = "battle-field" />
-            <UserArea dealCard = {dealCard} userDeck = {true} userPlayer= {userPlayer} battleInSession = {battleInSession} flip = {flip} score = {userScore + opponentScore} cardsRevealed= {cardsRevealed} gameStart= {gameStart} />
+            <UserArea dealCard = {dealCard} myTurn = {true} userDeck = {true} userPlayer= {userPlayer} battleInSession = {battleInSession} flip = {flip} score = {userScore + opponentScore} cardsRevealed= {cardsRevealed} gameStart= {gameStart} />
             </>
             :
             <div className = "loading">

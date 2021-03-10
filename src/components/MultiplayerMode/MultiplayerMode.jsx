@@ -25,6 +25,7 @@ function MultiplayerMode (){
     const [roomId, setRoomId] = useState(null)
     const [myTurn, setMyTurn] = useState(true)
     const [gameStart, setGameStart] = useState(false)
+    const [username, setMyUsername] = useState("")
     
 
     const dealCard = ()=>{
@@ -109,6 +110,7 @@ function MultiplayerMode (){
     }
 
     const handleBattle = (userPlayerWar, opponentPlayerWar)=>{
+        setMyTurn(!myTurn)
         setBattleInSession(true)
         setTimeout(()=>{
             if(userPlayerWar > opponentPlayerWar){
@@ -124,13 +126,13 @@ function MultiplayerMode (){
 
         setTimeout(() => {
             setCardsRevealed(true)
+            
         },
         3000)
 
         setTimeout(() => {
             handleBattlePoint(userPlayerWar,opponentPlayerWar)
             setfeedbackText(false)
-            setMyTurn(!myTurn)
         },
         4100)
     }
@@ -157,7 +159,9 @@ function MultiplayerMode (){
    }
 
     useEffect(() => {
-    pubnub.addListener({ message: handleMessage });
+        if(!myTurn){
+    pubnub.addListener({ message: handleMessage })
+        };
     pubnub.subscribe({channels: [`wargames${roomId}`]} );
   }, [pubnub, multiplayerReady]);
     
