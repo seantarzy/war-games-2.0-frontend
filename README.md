@@ -2,6 +2,7 @@ Hey!
 
 Remember the card game "war"? This is just like that, except using baseball players and a particulair baseball statistic for the card's value
 Check out the live website: https://mlbwargames.netlify.app/
+Backend: https://github.com/seantarzy/war-games-2.0
 
 # Getting Started with Create React App
 
