@@ -1,3 +1,8 @@
+Hey! 
+
+Remember the card game "war"? This is just like that, except using baseball players and a particulair baseball statistic for the card's value
+Check out the live website: https://mlbwargames.netlify.app/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
